@@ -1,0 +1,156 @@
+<!-- By: Andrew Dang -->
+<!DOCTYPE html>
+<html ng-app="mainPageApp">
+    <meta charset="utf-8"/>
+    <head>
+        <title id="myTitle">Database_Website</title>
+        <script type="text/javascript" src="static_files/app/lib/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="static_files/app/lib/angular.min.js"></script>
+        <link href="static_files/content/css/styles.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!-- After loading angular.min.js, add in controllers-->
+        <script type="text/javascript" src="static_files/content/jqueries/jqueryCalls.js"></script>
+        <script src="static_files/app/controllers/mainPage.js"></script>
+    </head>
+    <body id="myBody" ng-controller="MainPageController">
+        <!-- Navigation Bar -->
+        <div class="navBar">
+            <a id="homeLink" class="active" href="#home"><i class="fa fa-home"></i> Home</a>
+            <a id="searchLink" href="#search"><i class="fa fa-fw fa-search"></i> Search</a>
+            <a id="addLink" href="#add"><i class="fa fa-fw fa-plus"></i> Add</a>
+            <a id="editLink" href="#edit"><i class="fa fa-fw fa-edit"></i> Edit</a>
+            <a id="removeLink" href="#remove"><i class="fa fa-fw fa-trash"></i> Remove</a>
+            <a id="aboutLink" href="#about"> About</a>
+            <!-- a ng-click="testing()"><i class="fa fa-fw fa-refresh"></i> Testing...{{testVariable}}</a> -->
+        </div>
+        <!-- Header goes here -->
+        <header>
+            <h2>Example Website using SQLite </h2>
+            <span class="smallText">including Node, Angular, Express, Jquery...</span>
+        </header>
+        <!-- Subsection Instructions -->
+        
+        <!-- Table goes here -->
+        <div id="homeSection" class="home">
+            <div id="myDiv" class="divWrapper">
+                <br>
+                <select id="myTableSelect" class="custom_select">
+                    <option value="FEATURES">FEATURES</option>
+                    <option value="FLOWERS">FLOWERS</option>
+                    <option value="SIGHTINGS">SIGHTINGS</option>
+                </select>
+                <br><br>
+                <button id="button" type="button">REFRESH</button>
+                <p class="SearchResult"></p>
+            </div>
+            <div class="divWrapper"><div class="scroll">
+                <table id="myTable" max-height="400px">
+                    <thead><tr id="labels">
+                        <th class="attribute" ng-repeat="(key, value) in ListOfObjects[0];">{{key}}</th>
+                    </tr></thead>
+                    <tbody><tr ng-repeat="row in ListOfObjects">
+                        <td class="cellContent" ng-repeat="(key, value) in row;">{{value}}</td>
+                    </tr></tbody>
+                </table>
+            </div></div>
+        </div>
+        <div id="searchSection" class="hidden">
+            <div id="searchDiv">
+                <div class="inline">
+                    <br>
+                    <span class="otherText">Please select a flower.</span>
+                    &nbsp;
+                    <select id="mySearchSelect" class="custom_select">
+                        <option ng-repeat="flower in ListOfObjects" value="{{flower.COMNAME}}">{{flower.COMNAME}}</option>
+                    </select>
+                    &nbsp;&nbsp;
+                    <button id="searchButton" type="button">Search</button>
+                </div>
+                <br>
+                <div><p id="SearchResult" class="smallText"></p></div>
+                <div class="divWrapper"><div class="scroll">
+                    <table id="mySearchTable" max-height="400px">
+                        <thead><tr id="searchlabels">
+                            <th class="attribute" ng-repeat="(key, value) in SearchResultObjects[0];">{{key}}</th>
+                        </tr></thead>
+                        <tbody><tr ng-repeat="row in SearchResultObjects">
+                            <td class="cellContent" ng-repeat="(key, value) in row;">{{value}}</td>
+                        </tr></tbody>
+                    </table>
+                </div></div>
+            </div>
+        </div>
+        <div id="addSection" class="hidden">
+            <div id="addDiv">
+                <span class="otherText"><b>Insert a new sighting of a flower.</b></span>
+                <p class="smallText">WARNING: Incorrect inputs will be replaced with NULL or 0000-00-00!</p>
+                <br>
+                <form id="addForm" action="javascript:void(0)">
+                    <input type="text" name="flowerName" placeholder="Flower Name">&nbsp;
+                    <input type="text" name="personName" placeholder="Person Name">&nbsp;
+                    <input type="text" name="location" placeholder="Location">&nbsp;
+                    <br><br>
+                    <input type="text" name="sightedDateYear" placeholder="YYYY">&nbsp;
+                    <input type="text" name="sightedDateMonth" placeholder="MM">&nbsp;
+                    <input type="text" name="sightedDateDay" placeholder="DD">&nbsp;
+                </form>
+                <br>
+                <div class="divWrapper"><button id="addButton" type="button">Add</button></div>
+                <br>
+                <div><p id="AddResult" class="smallText"></p></div>
+            </div>
+        </div>
+        </div>
+        <div id="editSection" class="hidden">
+            <div id="editDiv">
+                <span class="otherText">Select flower from table that you want to change.</span>
+                <p class="smallText">WARNING: Empty Fields will be replaced with NULL.</p>
+                <p class="attribute">SELECTED FLOWER: {{rowInfo.COMNAME}}</p>
+                <div class="divWrapper">
+                    <div>
+                        <table id="editSelectionTable">
+                            <thead><tr>
+                                <th class="attribute" colspan=3>OLD VALUES</th>
+                            </tr></thead>
+                            <tbody><tr>
+                                <td class="cellContent" ng-repeat="(key, value) in rowInfo">{{value}}</td>
+                            </tr></tbody>
+                        </table>
+                        <br>
+                        <p class="attribute">NEW VALUES</p>
+                        <form action="javascript:void(0)">
+                            <input id="newG" type='text' placeholder='Genus here'>&nbsp;
+                            <input id="newS" type='text' placeholder='Species here'>&nbsp;
+                            <input id="newC" type='text' placeholder='Common Name here'>
+                        </form>
+                    </div>
+                    &nbsp;
+                    <div class="divWrapper"><button id="editButton" type="button">Submit</button></div>
+                    <p id="EditResult" class="smallText"></p>
+                </div>
+            </div>
+            <br>
+            <div class="divWrapper"><div class="scroll">
+                <table id="myEditTable" max-height="400px">
+                    <thead><tr id="editlabels">
+                        <th class="attribute" ng-repeat="(key, value) in ListOfObjects[0];">{{key}}</th>
+                    </tr></thead>
+                    <tbody><tr ng-repeat="row in ListOfObjects" ng-click="showDetails(ListOfObjects.indexOf(row))">
+                        <td class="cellContent" ng-repeat="(key, value) in row;">{{value}}</td>
+                    </tr></tbody>
+                </table>
+            </div></div>
+        </div>
+        <div id="removeSection" class="hidden">
+            <div id="removeDiv">
+                <p>THIS IS REMOVE SECTION.</p>
+            </div>
+        </div>
+        <div id="aboutSection" class="hidden">
+            <div id="aboutDiv" class="divWrapper">
+                <p class="otherText">THIS IS THE ABOUT SECTION.</p>
+            </div>
+        </div>
+    </body>
+</html>

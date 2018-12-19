@@ -1,0 +1,136 @@
+.navBar{
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navBar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navBar a:hover {
+    background-color: #ddd;
+    color: black;    
+}
+
+.navBar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.smallText{
+    font-size: 10px;
+}
+
+.custom_select{
+    display: inline-block;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+button{
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+}
+button:hover{
+    background:#fff;
+    color:#1AAB8A;
+}
+button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+}
+button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
+.attribute{
+    text-align: center;
+    border: 3px solid green;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    background-color: #4CAF50;
+}
+
+.cellContent{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+}
+
+.otherText{
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* to center the div element */
+.divWrapper{
+    text-align: center;
+}
+
+.scroll{
+    max-height: 300px;
+    max-width: 70%;
+    overflow-y: scroll;
+    display: inline-block;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+table {
+    background-color: #e3ffe3;
+    border-width: 3px;
+    border-spacing: 5px;
+    border-collapse: separate;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+th, td {
+    padding: 5px;
+}
+
+tr :hover {
+    background-color: #084908;
+}
+
+header { border-bottom: 1px solid #000; }
+header > h2 { display: inline-block; }
+header span { margin-left: 10px; }
+
+.hidden {
+    display: none;
+}
+
+.home {
+    display: block;
+}
+
+.inline{
+    display: "inline-block";
+}
